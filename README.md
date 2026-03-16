@@ -66,3 +66,33 @@ The tests validates the following:
 Confidence Level: 4/5
 
 I have given the Confidence Level a 4 out of 5. My test cases are covering normal cases as well as edge cases, but I could be forgetting some other scenarios for more advance testing and confidence. 
+
+## Features
+
+- Add and manage multiple pets under a single owner
+- Add, view, and complete pet care tasks
+- Smart daily scheduling that prioritizes incomplete tasks
+- Task sorting by priority and duration
+- Task filtering by pet and completion status
+- Reoccuring daily and weekly tasks
+- Warns when tasks are scheduled at the same time
+- Clear schedule explanation showing why tasks were selected
+- Session state for better user experience in Streamlit
+
+## 📸 Demo
+
+<a href="uml_final.png" target="_blank">
+<img src="uml_final.png" width="600">
+</a>
+
+## Reflect and Discuss
+The summary should be 5–7 sentences covering:
+
+- The core concept students needed to understand
+- Where students are most likely to struggle
+- Where AI was helpful vs misleading
+- One way they would guide a student without giving the answer
+
+The core concepts students need to understand is how to build a whole system starting from UML to diagram into a working project with a backend and a UI. The students need to understand the differernt components such as Owner, Pet, Task, and Scheduler and now they interact with each other. I think the students might struggle in understanding some parts of this project. I was initially confused what did "Generate documentation smart action to add 1-line docstrings" mean in Phase 2. A lot of this project like the UML diagram are from previous Tinker's or Show's, so I don't think the student should struggle with that. I think that maybe the student might struggling building everyone on top with each other in this project unless they are clear with the prompts. The AI is helping with providing a skeleton and explaining unfamiliar concepts. The AI is great at generating UML diagrams if you are really clear with what you want. The AI could be misleading if it suggests code or solutions that do not match the project requirements. The students should do what they have been doing in the past where they ask details questions without asking something vague. And this would help guide the student without giving them the answer. The students should think in details about the logic of this sysem within this project.  
+
+

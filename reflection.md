@@ -103,13 +103,16 @@ Edge Cases
 **a. What you tested**
 
 - What behaviors did you test?
+I tested core behaviors to make sure the scheduler logic works correctly. I verified the task completion status when it is marked complete. I also checked the pet's task count and confirmed that tasks are sorted correctly. I also checked that conflict detection identifies tasks schedules at the same time. 
 - Why were these tests important?
+These tests are imporant because they cover the essiential features of the system, and this includes task management, scheduling behavior, and overlap detection. 
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
+I am pretty sure that my scheduler works correctly for my cases. All my tests pass in my test cases. 
 - What edge cases would you test next if you had more time?
-
+If I had more time, I would test additional edge cases like multiple recurring tasks being completing at the same time, tasks with idential priority and duration values, invalid scheduled time, pets with no tasks, and owner with no pets. 
 ---
 
 ## 5. Reflection
@@ -117,11 +120,15 @@ Edge Cases
 **a. What went well**
 
 - What part of this project are you most satisfied with?
+I am satified with all the features I added to this project. I liked builidng up the Scheduler class and I was able to ad edge cases to it. 
 
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
 
+I would expand this project to include my test cases. I want to support better timing input and I also want to include owner preferences like times of the day. 
+
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+I like that I incrementally added to each part of this project. Starting of with a UML diagram was helpful. The more detailed I was with the AI, the better of a response I was recieving. So I was trying to think through all the aspects of this project. The best results came when I used AI for brainstorming, debugging, and refinement, and I also evaluated the suggestions carefully and adapted them to fit my actual design and requirements.

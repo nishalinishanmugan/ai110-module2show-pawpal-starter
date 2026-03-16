@@ -12,7 +12,7 @@ class Task:
     scheduled_time: str
     due_date: date
     completion_status: bool = False
-    priority: int = 1
+    priority: str = "Medium"
 
     def mark_complete(self) -> None:
         """Mark the task as completed."""
@@ -126,6 +126,15 @@ class Scheduler:
         """Initialize the scheduler with an owner."""
         self.owner = owner
 
+    def _priority_value(self, priority: str) -> int:
+        """Convert priority label to numeric value for sorting."""
+        priority_map = {
+            "Low": 1,
+            "Medium": 2,
+            "High": 3
+        }
+        return priority_map.get(priority, 2)
+
     def retrieve_all_tasks(self) -> List[tuple[str, Task]]:
         """Get all tasks from all of the owner's pets."""
         return self.owner.get_all_tasks()
@@ -149,7 +158,7 @@ class Scheduler:
         """Sort incomplete tasks by highest priority first."""
         return sorted(
             self.get_incomplete_tasks(),
-            key=lambda item: item[1].priority,
+            key=lambda item: self._priority_value(item[1].priority),
             reverse=True
         )
 
@@ -177,12 +186,57 @@ class Scheduler:
 
         return tasks
 
+    def calculate_task_weight(self, task: Task) -> float:
+        """
+        Calculate a weighted score for a task.
+        Higher score means higher scheduling importance.
+        """
+        score = 0.0
+
+        # Priority matters most
+        score += self._priority_value(task.priority) * 10
+
+        # Sooner due dates matter more
+        days_until_due = (task.due_date - date.today()).days
+        if days_until_due <= 0:
+            score += 8
+        elif days_until_due == 1:
+            score += 5
+        elif days_until_due <= 3:
+            score += 3
+
+        # Recurring tasks get a slight boost
+        if task.frequency.lower() == "daily":
+            score += 4
+        elif task.frequency.lower() == "weekly":
+            score += 2
+
+        # Shorter tasks get a small bonus
+        score += max(0, 5 - (task.time_needed / 15))
+
+        return score
+
+    def sort_tasks_by_weight(self) -> List[tuple[str, Task]]:
+        """Sort incomplete tasks by weighted scheduling importance."""
+        return sorted(
+            self.get_incomplete_tasks(),
+            key=lambda item: self.calculate_task_weight(item[1]),
+            reverse=True
+        )
+
     def create_daily_schedule(self) -> List[tuple[str, Task]]:
         """Return incomplete tasks sorted by priority then time."""
         return sorted(
             self.get_incomplete_tasks(),
-            key=lambda item: (-item[1].priority, item[1].time_needed)
+            key=lambda item: (
+                -self._priority_value(item[1].priority),
+                item[1].time_needed
+            )
         )
+
+    def create_weighted_schedule(self) -> List[tuple[str, Task]]:
+        """Return incomplete tasks sorted by weighted priority score."""
+        return self.sort_tasks_by_weight()
 
     def mark_task_complete(self, pet_name: str, task_description: str) -> str:
         """Mark a task complete and create next recurring instance if applicable."""
@@ -230,4 +284,11 @@ class Scheduler:
             "Tasks are included from all pets, incomplete tasks are prioritized, "
             "higher-priority tasks appear first, and shorter tasks break ties. "
             "Recurring daily and weekly tasks create a new future instance when completed."
+        )
+
+    def get_weighted_schedule_explanation(self) -> str:
+        """Explain how the weighted schedule was organized."""
+        return (
+            "Weighted scheduling considers priority first, then urgency based on due date, "
+            "gives recurring tasks extra importance, and slightly favors shorter tasks."
         )
