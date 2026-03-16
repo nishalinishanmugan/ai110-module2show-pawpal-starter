@@ -41,7 +41,9 @@ The Owner class stores the pet owner’s information like name, available time, 
 **b. Design changes**
 
 - Did your design change during implementation?
+Yes because I initially had planned for 5 classes before I knew it was supposed to be 4 classes after reading later. I also didn't think about how the Owner would manager multiple pets and have a method that would retrieve all the tasks across all the pets. 
 - If yes, describe at least one change and why you made it.
+I changed my UML diagram from 5 classes to 4. I changed the Task class attributes after understanding what was required. these changes made it easier to meet the project requirements. 
 
 ---
 
@@ -50,12 +52,17 @@ The Owner class stores the pet owner’s information like name, available time, 
 **a. Constraints and priorities**
 
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
+The scheduler has task priority, which determines which task should be completed. Higher priority tasks are scheduled before lower priority tasks. For example, feeding is ranked higher over grooming. I also have task completion status to ensure only incomplete tasks are included. 
+
 - How did you decide which constraints mattered most?
+I decided which contraints mattered most based on the owner's time and the pet's prioritizes. A pet need the essentials first like food and water. 
 
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
+It chooses higher prioritize tasks, and it does prioritize a balanced schedule throughout the day. 
 - Why is that tradeoff reasonable for this scenario?
+Tasks are prioritzed over urgency. Like high-prority are proritized if they are not completed. This means that the schedule isn't balanced throughout the day. But this ensures that more tasks are not left incomplete after each day. 
 
 ---
 
@@ -64,16 +71,34 @@ The Owner class stores the pet owner’s information like name, available time, 
 **a. How you used AI**
 
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
+I used AI for multiple parts of this project like generating the UML design, brainstorming different factors of this project like the classes. I also used AI for the code generation and debugging errors. 
 - What kinds of prompts or questions were most helpful?
+The more detailed the prompts and questions were, the more helpful of a response I got from the AI. 
 
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
+I didn't accept AI suggestions that went againt what the project was asking. The AI first suggesting 6 classes but this project specified 4 main classes. And if the AI's suggestion was too complicated, I wouldn't accept it either. 
 - How did you evaluate or verify what the AI suggested?
+I tested the logic in my terminal by runing py main.py and py -m pytest. And I made sure the results matched what I was expecting. 
 
 ---
 
 ## 4. Testing and Verification
+
+Core Behaviors
+- Adding task to pets work correctly 
+- Marking a task completes and it updates correctly 
+- Sorting tasks works correctly 
+- Recurring tasks works correct and creates a new instance
+- Overlapping tasks are identified
+
+Edge Cases
+- Pet has no tasks
+- Owner has no pets
+- Two tasks happening at the same time
+- All tasks are completed
+- Tasks with the same priority or duration
 
 **a. What you tested**
 
