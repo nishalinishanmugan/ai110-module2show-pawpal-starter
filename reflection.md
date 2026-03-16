@@ -3,9 +3,40 @@
 ## 1. System Design
 
 **a. Initial design**
+Brainstorm:
+The three core actions can:
+    1. Owner and Pet information - basic information about the owner and pet like the owner's name, pet's name, pet type, pet age, preferences, etc. 
+    2. Pet care tasks - feeding, walking, medication, grooming, play schedule, etc. Time of each task and the priority. 
+    3. Daily Care Plan - based on task priority, preferences, and avaiable time. Why are tasks choosen, delayed or left out.
+
+
+Building Blocks: 
+1. Owner
+- Attributes: name, time_available, preferences, schedule_notes
+- Methods: update_time_available(), update_preferences()
+
+2. Pet
+- Attributes:name, species, breed, age, care_notes
+- Methods: update_info(), get_summary()
+
+3. Task
+- Attributes: title, category, duration, priority, preferred_time, notes, required or is_mandatory
+- Methods: edit_task(), mark_complete(), get_task_details()
+
+4. Planner or Scheduler
+- Attributes: tasks, available_time, selected_plan, reasoning_log
+- Methods: generate_plan(), sort_tasks_by_priority(), filter_tasks_by_constraints(), explain_plan()
+
+5. DailyPlan
+- Attributes: planned_tasks, total_time, unused_time, explanation
+- Methods: display_plan(), calculate_total_time(), get_explanation()
 
 - Briefly describe your initial UML design.
+ The initial UML design is Owner, Pet, Task, and Scheduler. These cover the main requirements of the app based on the description. Because we need to track pet care tasks (Task), contraints (Scheduler), and Daily Plan (Scheduler). And the other two classes are Owner and Pet because those are the two thing that are interacting in our app. 
+
 - What classes did you include, and what responsibilities did you assign to each?
+
+The Owner class stores the pet owner’s information like name, available time, and preferences. This class represents the person making decisions and providing constraints for the daily plan. The Pet class stores information about the pet like name, species, age, and care notes. The Task class represents each pet care activity, like feeding, walking, or giving medication. It has details such as duration, priority, notes, and whether the task is mandatory. The Scheduler class is responsible for the decision making. It takes tasks and owner constraints, sorts and filters them, and generates the daily plan while also keeping track of reasoning for why tasks were chosen. A potentail logic bottle neck would be if the Scheduler becomes overloaded because it handles too many responsibilites such as sorting tasks, applying preferences, checking time limits, and explaining. It's possible that the scheduler task needs to break up into two classes. One for creating the plan and the other for storing it. 
 
 **b. Design changes**
 
